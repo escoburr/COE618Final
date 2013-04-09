@@ -14,7 +14,7 @@ import java.awt.event.WindowListener;
 import java.net.*;
 import java.util.ArrayList;
 
-public class Server extends BlackJackGUI {
+public class Server {
 
     public static int port = 3421;
     public static String ip = "";
@@ -23,6 +23,7 @@ public class Server extends BlackJackGUI {
     public static ArrayList<Integer> list_client_states = new ArrayList<Integer>();
     public static ArrayList<DataPackage> list_data = new ArrayList<DataPackage>();
     private static Runnable accept = new Runnable() {
+        @Override
         public void run() {
             new Thread(send).start();
             new Thread(receive).start();
@@ -46,6 +47,7 @@ public class Server extends BlackJackGUI {
         }
     };
     private static Runnable send = new Runnable() {
+        @Override
         public void run() {
             ObjectOutputStream oos;
             while (true) {
@@ -58,12 +60,12 @@ public class Server extends BlackJackGUI {
                         oos.writeObject(list_data);
                         if (client_state == 1)//Kicked by Server
                         {
-                            //disconnectClient(i);
-                            //i--;
+                            disconnectClient(i);
+                            i--;
                         } else if (client_state == 2)//Server Disconnected
                         {
-                            //disconnectClient(i);
-                            //i--;
+                            disconnectClient(i);
+                            i--;
                         }
                     } catch (Exception ex) {
                     }
@@ -72,6 +74,7 @@ public class Server extends BlackJackGUI {
         }
     };
     private static Runnable receive = new Runnable() {
+        @Override
         public void run() {
             ObjectInputStream ois;
             while (true) {
@@ -85,12 +88,12 @@ public class Server extends BlackJackGUI {
                         list_data.set(i, dp);
 
                         if (recieve_state == 1) {
-                          //  disconnectClient(i);
-                          //  i--;
+                            disconnectClient(i);
+                            i--;
                         }
                     } catch (Exception ex) { //Client Disconnected (Client didnt notify server)
-                       //disconnectClient(i);
-                        //i--;
+                       disconnectClient(i);
+                        i--;
                     }
                 }
             }
@@ -98,17 +101,19 @@ public class Server extends BlackJackGUI {
     };
 
     public static void disconnectClient(int index) {
+        System.out.println (index);
         try {
             list_clients_model.removeElementAt(index);
             list_client_states.remove(index);
             list_data.remove(index);
             list_sockets.remove(index);
+            list_sockets.get(index).close();
 
-        } catch (Exception ex) {
-        }
-        finally {System.exit(0);}
-        
+        } catch (Exception ex) {}
+       finally {System.exit(0);
+        }  
     }
+    
     public static JFrame frame;
     public static JPanel content;
     public static JPanel panel1;
@@ -120,6 +125,13 @@ public class Server extends BlackJackGUI {
     public static DefaultListModel list_clients_model;
 
     public static void main(String[] args) {
+        
+        try{
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch (Exception Ex){  
+        }
+        
         try {
             ip = InetAddress.getLocalHost().getHostAddress() + ":" + port;
             server = new ServerSocket(port, 0, InetAddress.getLocalHost());
@@ -132,9 +144,10 @@ public class Server extends BlackJackGUI {
 
         button_disconnect = new JButton();
         button_disconnect.setText("Disconnect");
-
         button_disconnect.addActionListener(new ActionListener() {
-            public void actionPerfomed(ActionEvent e) {
+           
+          @Override
+            public void actionPerformed(ActionEvent e) {
                 int selected = list_clients.getSelectedIndex();
                 if (selected != -1) {
                 }
@@ -146,10 +159,6 @@ public class Server extends BlackJackGUI {
                 finally{System.exit(0);}
             }
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-            }
         });
 
         list_clients_model = new DefaultListModel();
@@ -166,37 +175,39 @@ public class Server extends BlackJackGUI {
         frame = new JFrame();
         frame.setTitle("Server - " + ip);
         frame.addWindowListener(new WindowListener() {
-            public void windowActivated(WindowEvent e) {
-            }
+            @Override
+            public void windowActivated(WindowEvent e) {}
 
             public void windowClose(WindowEvent e) {
-                System.exit(0);
+                //System.exit(0);
             }
 
             @Override
             public void windowClosing(WindowEvent e) {
-                System.exit(0);
-                while (list_sockets.size() != 0) {
+                  while (!list_sockets.isEmpty()) {
                     try {
                         for (int i = 0; i < list_client_states.size(); i++) {
                             list_client_states.set(i, 2);
                         }
-                    } catch (Exception ex) {
-                    }
+                    } catch (Exception ex) { }
                     finally{System.exit(0);}
                 }
                 
             }
 
+            @Override
             public void windowDeactivated(WindowEvent e) {
             }
 
+            @Override
             public void windowDeiconified(WindowEvent e) {
             }
 
+            @Override
             public void windowIconified(WindowEvent e) {
             }
 
+            @Override
             public void windowOpened(WindowEvent e) {
             }
 
