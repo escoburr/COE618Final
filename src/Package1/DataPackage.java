@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class DataPackage implements Serializable {
 
-    public float x = 0.0f;
-    public float y = 0.0f;
     public String username = "";
-    public int wins = 0;
-    public int totalgames=0;
+    public int wincount =0;
+    public int gamecount =0;
+    public int stateofgame =0;
+    public String ip = "";
     
 }

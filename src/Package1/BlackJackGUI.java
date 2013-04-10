@@ -5,15 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
-
-
 
 public class BlackJackGUI {
 
@@ -37,46 +31,20 @@ public class BlackJackGUI {
     public Utility help;
     //game on
     public boolean gameOn;
-
     public static Socket socket;
     public static int port = 3421;
     public static String ip = "";
     public static int wincount = 0;
     public static int losecount = 0;
     public static int tiecount = 0;
+    public static int gamecount = 0;
     
+
     public static void main(String[] args) throws InterruptedException {
+        Client c = new Client();
         BlackJackGUI gui = new BlackJackGUI();
         gui.init();
-        try {
-            String local;
-            try {
-                local = InetAddress.getLocalHost().getHostAddress() + ":" + port;
-            } catch (UnknownHostException ex) {
-                local = "Network Error";
-            }
-            ip = (String) JOptionPane.showInputDialog(null, "IP: ", "Info", JOptionPane.INFORMATION_MESSAGE, null, null, local);
-            port = Integer.parseInt(ip.substring(ip.indexOf(":") + 1));
-            ip = ip.substring(0, ip.indexOf(":"));
-
-            socket = new Socket(ip, port);
-
-            String username = System.getProperty("user.name");
-            username = (String) JOptionPane.showInputDialog(null, "Username:", "Info", JOptionPane.INFORMATION_MESSAGE, null, null, username);
-
-            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-            oos.writeObject(username);
-            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-            String response = (String) ois.readObject();
-            JOptionPane.showMessageDialog(null, response, "Message", JOptionPane.INFORMATION_MESSAGE);
-
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error:" + ex.getMessage(), "Alert", JOptionPane.ERROR_MESSAGE);
-            System.exit(0);
-        }
     }
-
     /*
      * initialize the GUI
      */
@@ -139,7 +107,7 @@ public class BlackJackGUI {
 //        newGameButton.setBorderPainted(false);
 //        newGameButton.setOpaque(false);
         newGameButton.setBounds(105, 495, 200, 40);
-        
+
         drawPanel.add(newGameButton);
         //add hit button to panel
         JButton hitButton = new JButton("HIT");
@@ -203,10 +171,12 @@ public class BlackJackGUI {
                 if (help.checkBlackJack(player)) {
                     //dealer has also blackjack => tie
                     if (help.determineWinner(player, dealer) == Utility.Winner.TIE) {
-                        message = "Blackjack ! Tie !";tiecount++;
+                        message = "Blackjack ! Tie !";
+                        tiecount++;
                         gameOn = false;
                     } else {
-                        message = "Blackjack ! You win !";wincount++;
+                        message = "Blackjack ! You win !";
+                        wincount++;
                         gameOn = false;
                     }
                 }
@@ -257,7 +227,8 @@ public class BlackJackGUI {
                 //check if the player has busted (> 21)
                 //winner = help.determineWinner(player, dealer);
                 if (help.checkBust(player)) {
-                    message = "Busted ! You lose !";losecount++;
+                    message = "Busted ! You lose !";
+                    losecount++;
                     gameOn = false;
                     if (dealer.getValueOfHand()[0] > 21) {
                         mdealer = "" + dealer.getValueOfHand()[1];
@@ -298,7 +269,8 @@ public class BlackJackGUI {
                 }
                 //is the dealer busted
                 if (help.checkBust(dealer)) {
-                    message = "You win !";wincount++;
+                    message = "You win !";
+                    wincount++;
                     drawPanel.setMessage(message);
                     drawPanel.setwincount(wincount);
                     drawPanel.setlosecount(losecount);
@@ -318,17 +290,22 @@ public class BlackJackGUI {
                 } else {
                     //determine the winner
                     winner = help.determineWinner(player, dealer);
+                    gamecount = wincount+losecount +tiecount;
                     switch (winner) {
                         case PLAYER:
-                            message = "You win !";wincount++;
+                            message = "You win !";
+                            wincount++;
                             break;
                         case DEALER:
-                            message = "You lose !";losecount++;
+                            message = "You lose !";
+                            losecount++;
                             break;
                         case TIE:
-                            message = "Tie !";tiecount++;
+                            message = "Tie !";
+                            tiecount++;
                             break;
                         default:
+                            
                             break;
                     }
                     if (dealer.getValueOfHand()[0] > 21) {
@@ -364,6 +341,7 @@ public class BlackJackGUI {
 /*
  * class used to draw the panel
  */
+
 class DrawFrame extends JPanel {
 
     //player's hand
@@ -377,7 +355,6 @@ class DrawFrame extends JPanel {
     String wincount = "Win: ";
     String losecount = "Lose: ";
     String tiecount = "Tie: ";
-    
     //game on
     boolean gameOn;
 
@@ -409,17 +386,17 @@ class DrawFrame extends JPanel {
     public void setmdealer(String mdealer) {
         this.mdealer = mdealer;
     }
-    
+
     public void setwincount(int wincount) {
-        this.wincount = "Win: "+wincount;
+        this.wincount = "Win: " + wincount;
     }
 
     public void setlosecount(int losecount) {
-        this.losecount = "Lost: "+losecount;
+        this.losecount = "Lost: " + losecount;
     }
 
     public void settiecount(int tiecount) {
-        this.tiecount = "Tie: " +tiecount;
+        this.tiecount = "Tie: " + tiecount;
     }
     /*
      * set gameOn signal
@@ -441,27 +418,27 @@ class DrawFrame extends JPanel {
         g.setFont(new Font("Arial", Font.BOLD, 40));
         g.setColor(new Color(1.0f, 0.0f, 0.0f));
         g.drawString(message, 350, 325);
-        
+
         g.setFont(new Font("Arial", Font.BOLD, 30));
         g.setColor(new Color(94, 201, 240));
         g.drawString(mplayer, 300, 450);
-        
+
         g.setFont(new Font("Arial", Font.BOLD, 30));
         g.setColor(new Color(94, 201, 240));
         g.drawString(mdealer, 300, 200);
-        
+
         g.setFont(new Font("Arial", Font.BOLD, 20));
         g.setColor(new Color(94, 201, 240));
-        g.drawString(wincount, 50, 100);        
-        
+        g.drawString(wincount, 50, 100);
+
         g.setFont(new Font("Arial", Font.BOLD, 20));
         g.setColor(new Color(94, 201, 240));
         g.drawString(losecount, 50, 200);
-        
+
         g.setFont(new Font("Arial", Font.BOLD, 20));
         g.setColor(new Color(94, 201, 240));
         g.drawString(tiecount, 50, 300);
-        
+
         //draw player's hand
         if (playerHand != null) {
             for (int i = 0; i < playerHand.size(); i++) {

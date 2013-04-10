@@ -1,9 +1,6 @@
 package Package1;
 
 import java.awt.*;
-import java.awt.image.*;
-import java.io.File;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /*
@@ -238,22 +235,5 @@ public class Background extends JPanel {
         float x = (width - image.getWidth(null)) * alignmentX;
         float y = (height - image.getHeight(null)) * alignmentY;
         g.drawImage(image, (int) x + insets.left, (int) y + insets.top, this);
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Test");
-        BufferedImage img = null;
-        try {
-            File f = new File(".\\pictures\\title.png");
-            img = ImageIO.read(f);
-            System.out.println("File " + f.toString());
-        } catch (Exception e) {
-            System.out.println("Cannot read file: " + e);
-        }
-        Background background = new Background(img, Background.SCALED, 0.50f, 0.5f);
-        frame.setContentPane(background);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(723, 447);
-        frame.setVisible(true);
     }
 }

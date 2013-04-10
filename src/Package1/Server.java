@@ -33,6 +33,8 @@ public class Server {
 
     public static int port = 3421;
     public static String ip = "";
+    public static int gamecount =0;
+    public static int wincount =0;
     public static ServerSocket server;
     public static List<Socket> list_sockets = Collections.synchronizedList(new ArrayList<Socket>());
     public static List<Integer> list_client_states = Collections.synchronizedList(new ArrayList<Integer>());
@@ -62,9 +64,9 @@ public class Server {
                     ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
                     if (accepted) {
-                        oos.writeObject("Welcome To This Server...");
+                        oos.writeObject("Welcome To BlackJack Server!");
 
-                        list_clients_model.addElement(username + " - " + socket.getInetAddress().getHostAddress() + " - " + socket.getInetAddress().getHostName() + " Wins: " + BlackJackGUI.wincount + " Games: " + BlackJackGUI.gamecount);
+                        list_clients_model.addElement(username + " - " + socket.getInetAddress().getHostAddress() + " Wins: " + wincount + " Games: " + gamecount);
                         list_client_states.add(0);
 
                         list_data.add(new DataPackage());
@@ -116,17 +118,27 @@ public class Server {
         @Override
         public void run() {
             ObjectInputStream ois;
-
             while (true) {
                 for (int i = 0; i < list_sockets.size(); i++) {
                     try {
-                        ois = new ObjectInputStream(list_sockets.get(i).getInputStream());
-                        int receive_state = (Integer) ois.readObject();
+//                        ois = new ObjectInputStream(list_sockets.get(i).getInputStream());
+//                        int receive_state = (Integer) ois.readObject();
 
                         ois = new ObjectInputStream(list_sockets.get(i).getInputStream());
-                        DataPackage dp = (DataPackage) ois.readObject();
-
-                        list_data.set(i, dp);
+                        DataPackage dp2 = new DataPackage();
+                        dp2.gamecount = 0;
+                        dp2.wincount = 0;
+                        dp2.username = "";
+                        dp2.stateofgame = 0;
+                        dp2.ip = "";
+                        dp2 = (DataPackage) ois.readObject();
+                        int receive_state;
+                        receive_state = dp2.stateofgame;
+                        
+                        list_clients_model.set(i, dp2.username + " - " + dp2.ip+ " Wins: " + dp2.wincount + " Games: " + dp2.gamecount);
+                        
+                        
+                        list_data.set(i, dp2);
 
                         if (receive_state == 1) // Client Disconnected by User
                         {
