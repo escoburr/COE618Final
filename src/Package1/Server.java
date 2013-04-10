@@ -99,7 +99,6 @@ public class Server {
                             disconnectClient(i);
                             i--;
                             JOptionPane.showMessageDialog(null, "Disconnected by Server", "Info", JOptionPane.INFORMATION_MESSAGE);
-                            System.exit(0);
                         } else if (client_state == 2) // Server Disconnected
                         {
                             disconnectClient(i);
