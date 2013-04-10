@@ -61,7 +61,7 @@ public class Client {
                 if (socket != null) {
                     try {
                         DataPackage dp1 = new DataPackage();
-                        dp1.gamecount = BlackJackGUI.gamecount;
+                        dp1.gamecount = BlackJackGUI.wincount+BlackJackGUI.losecount+BlackJackGUI.tiecount;
                         dp1.wincount = BlackJackGUI.wincount;
                         dp1.username = username;
                         dp1.stateofgame = state;
