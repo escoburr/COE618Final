@@ -53,7 +53,7 @@ public class BlackJackGUI {
         mainframe = new JFrame();
         BufferedImage img2 = null;
         try {
-            File f1 = new File(".\\pictures\\title.png");
+            File f1 = new File("pictures/title.png");
             img2 = ImageIO.read(f1);
             System.out.println("File " + f1.toString());
         } catch (Exception e) {
@@ -80,7 +80,7 @@ public class BlackJackGUI {
         frame = new JFrame();
         BufferedImage img = null;
         try {
-            File f = new File(".\\pictures\\table.png");
+            File f = new File("pictures/table.png");
             img = ImageIO.read(f);
             System.out.println("File " + f.toString());
         } catch (Exception e) {
