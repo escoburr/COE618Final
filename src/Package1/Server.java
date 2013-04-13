@@ -29,15 +29,43 @@ import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+/**
+ *
+ * @author ytwytw
+ */
 public class Server {
 
+    /**
+     * define port
+     */
     public static int port = 3421;
+    /**
+     * define ip 
+     */
     public static String ip = "";
+    /**
+     * define gamepkg
+     */
     public static int gamecount =0;
+    /**
+     * define gamepkg
+     */
     public static int wincount =0;
+    /**
+     * define server service
+     */
     public static ServerSocket server;
+    /**
+     * define sync list
+     */
     public static List<Socket> list_sockets = Collections.synchronizedList(new ArrayList<Socket>());
+    /**
+     * define client status 
+     */
     public static List<Integer> list_client_states = Collections.synchronizedList(new ArrayList<Integer>());
+    /**
+     * define datapkg transmission 
+     */
     public static List<DataPackage> list_data = Collections.synchronizedList(new ArrayList<DataPackage>());
     private static Runnable accept = new Runnable() {
         @Override
@@ -120,9 +148,6 @@ public class Server {
             while (true) {
                 for (int i = 0; i < list_sockets.size(); i++) {
                     try {
-//                        ois = new ObjectInputStream(list_sockets.get(i).getInputStream());
-//                        int receive_state = (Integer) ois.readObject();
-
                         ois = new ObjectInputStream(list_sockets.get(i).getInputStream());
                         DataPackage dp2 = new DataPackage();
                         dp2.gamecount = 0;
@@ -156,6 +181,10 @@ public class Server {
         }
     };
 
+    /**
+     *
+     * @param index
+     */
     public static void disconnectClient(int index) {
         try {
             list_clients_model.removeElementAt(index);
@@ -165,6 +194,9 @@ public class Server {
         } catch (Exception ex) {
         }
     }
+    /**
+     * GUI initial 
+     */
     public static JFrame frame;
     public static JPanel content;
     public static JPanel panel1;
@@ -174,6 +206,10 @@ public class Server {
     public static JList list_clients;
     public static DefaultListModel list_clients_model;
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

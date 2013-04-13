@@ -5,6 +5,10 @@ import java.util.ArrayList;
 /*
  * player class
  */
+/**
+ *
+ * @author ytwytw
+ */
 public class Player {
 	
 	//player's hand
@@ -13,14 +17,21 @@ public class Player {
 	//valueOfHand[1] includes the value with ace valued as 1
 	private int[] valueOfHand;
 	
-	public Player() {
+	/**
+     * first 2 card initial 
+     */
+    public Player() {
 		valueOfHand = new int[2];
 	}
 	
 	/*
 	 * add card to hand and increase the value of the hand
 	 */
-	public void addCard(Card card) {
+	/**
+     *
+     * @param card
+     */
+    public void addCard(Card card) {
 		boolean aceFound = false;
 
 		//find out if the hand already has an ace
@@ -52,28 +63,44 @@ public class Player {
 	/*
 	 * get hand
 	 */
-	public ArrayList<Card> getHand() {
+	/**
+     *
+     * @return
+     */
+    public ArrayList<Card> getHand() {
 		return hand;
 	}
 	
 	/*
 	 * get the value of the hand
 	 */
-	public int[] getValueOfHand () {
+	/**
+     *
+     * @return
+     */
+    public int[] getValueOfHand () {
 		return valueOfHand;
 	}
 	
 	/*
 	 * set the value of the hand
 	 */
-	public void setValueOfHand (int[] valueOfHand) {
+	/**
+     *
+     * @param valueOfHand
+     */
+    public void setValueOfHand (int[] valueOfHand) {
 		this.valueOfHand = valueOfHand;
 	}
 	
 	/*
 	 * print hand as a string 
 	 */
-	public String toString() {
+	/**
+     *
+     * @return
+     */
+    public String toString() {
 		StringBuffer sb = new StringBuffer();
 		for (int i=0; i < this.hand.size(); i++) {
 			sb.append(hand.get(i).getFaceValue().toString() + "of" + hand.get(i).getSuit().toString() + " ");

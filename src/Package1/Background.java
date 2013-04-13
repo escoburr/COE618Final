@@ -12,10 +12,23 @@ import javax.swing.*;
  *  Also, any component added directly to this panel will be made
  *  non-opaque so that the custom painting can show through.
  */
+/**
+ *
+ * @author ytwytw
+ */
 public class Background extends JPanel {
 
+    /**
+     * Window size is scaled value initialization 
+     */
     public static final int SCALED = 0;
+    /**
+     * Window size is tiled value initialization 
+     */
     public static final int TILED = 1;
+    /**
+     * Window size is actual value initialization 
+     */
     public static final int ACTUAL = 2;
     private Paint painter;
     private Image image;
@@ -27,12 +40,21 @@ public class Background extends JPanel {
     /*
      *  Set image as the background with the SCALED style
      */
+    /**
+     *
+     * @param image
+     */
     public Background(Image image) {
         this(image, SCALED);
     }
 
     /*
      *  Set image as the background with the specified style
+     */
+    /**
+     *
+     * @param image
+     * @param style
      */
     public Background(Image image, int style) {
         setImage(image);
@@ -42,6 +64,13 @@ public class Background extends JPanel {
 
     /*
      *  Set image as the backround with the specified style and alignment
+     */
+    /**
+     *
+     * @param image
+     * @param style
+     * @param alignmentX
+     * @param alignmentY
      */
     public Background(Image image, int style, float alignmentX, float alignmentY) {
         setImage(image);
@@ -54,6 +83,10 @@ public class Background extends JPanel {
     /*
      *  Use the Paint interface to paint a background
      */
+    /**
+     *
+     * @param painter
+     */
     public Background(Paint painter) {
         setPaint(painter);
         setLayout(new BorderLayout());
@@ -61,6 +94,10 @@ public class Background extends JPanel {
 
     /*
      *	Set the image used as the background
+     */
+    /**
+     *
+     * @param image
      */
     public void setImage(Image image) {
         this.image = image;
@@ -70,6 +107,10 @@ public class Background extends JPanel {
     /*
      *	Set the style used to paint the background image
      */
+    /**
+     *
+     * @param style
+     */
     public void setStyle(int style) {
         this.style = style;
         repaint();
@@ -77,6 +118,10 @@ public class Background extends JPanel {
 
     /*
      *	Set the Paint object used to paint the background
+     */
+    /**
+     *
+     * @param painter
      */
     public void setPaint(Paint painter) {
         this.painter = painter;
@@ -86,6 +131,10 @@ public class Background extends JPanel {
     /*
      *  Specify the horizontal alignment of the image when using ACTUAL style
      */
+    /**
+     *
+     * @param alignmentX
+     */
     public void setImageAlignmentX(float alignmentX) {
         this.alignmentX = alignmentX > 1.0f ? 1.0f : alignmentX < 0.0f ? 0.0f : alignmentX;
         repaint();
@@ -93,6 +142,10 @@ public class Background extends JPanel {
 
     /*
      *  Specify the horizontal alignment of the image when using ACTUAL style
+     */
+    /**
+     *
+     * @param alignmentY
      */
     public void setImageAlignmentY(float alignmentY) {
         this.alignmentY = alignmentY > 1.0f ? 1.0f : alignmentY < 0.0f ? 0.0f : alignmentY;
@@ -102,12 +155,20 @@ public class Background extends JPanel {
     /*
      *  Override method so we can make the component transparent
      */
+    /**
+     *
+     * @param component
+     */
     public void add(JComponent component) {
         add(component, null);
     }
 
     /*
      *  Override to provide a preferred size equal to the image size
+     */
+    /**
+     *
+     * @return
      */
     @Override
     public Dimension getPreferredSize() {
@@ -121,6 +182,11 @@ public class Background extends JPanel {
     /*
      *  Override method so we can make the component transparent
      */
+    /**
+     *
+     * @param component
+     * @param constraints
+     */
     public void add(JComponent component, Object constraints) {
         if (isTransparentAdd) {
             makeComponentTransparent(component);
@@ -133,6 +199,10 @@ public class Background extends JPanel {
      *  Controls whether components added to this panel should automatically
      *  be made transparent. That is, setOpaque(false) will be invoked.
      *  The default is set to true.
+     */
+    /**
+     *
+     * @param isTransparentAdd
      */
     public void setTransparentAdd(boolean isTransparentAdd) {
         this.isTransparentAdd = isTransparentAdd;
@@ -161,6 +231,10 @@ public class Background extends JPanel {
 
     /*
      *  Add custom painting
+     */
+    /**
+     *
+     * @param g
      */
     @Override
     protected void paintComponent(Graphics g) {

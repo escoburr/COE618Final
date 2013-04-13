@@ -8,6 +8,10 @@ import javax.swing.ImageIcon;
  * - 52 cards
  * - no jokers
  */
+/**
+ *
+ * @author ytwytw
+ */
 public class Deck {
 	
 	static final int MAX = 52;	
@@ -17,7 +21,10 @@ public class Deck {
 	/*
 	 * initiate and create the deck of 52 cards
 	 */
-	public Deck() {
+	/**
+     *
+     */
+    public Deck() {
 		int index = 0;	
 		for(Card.FaceValue faceValue : Card.FaceValue.values())
 			for(Card.Suit suit: Card.Suit.values()) {
@@ -29,7 +36,11 @@ public class Deck {
 	/*
 	 * deal a card from a deck
 	 */
-	public Card dealCard() {
+	/**
+     *
+     * @return
+     */
+    public Card dealCard() {
 		//remove dealed card from a deck 
 		int index = (int)(Math.random()*deck.size()); 
 		return deck.remove(index);		

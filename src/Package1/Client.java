@@ -8,8 +8,15 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author ytwytw
+ */
 public class Client {
 
+    /**
+     * connecting tryout
+     */
     public Client() {
         try {
             String local;
@@ -50,7 +57,13 @@ public class Client {
             System.exit(0);
         }
     } 
+    /**
+     * state setup passing msg
+     */
     public int state = 0;
+    /**
+     * connected thread perform task
+     */
     public boolean connected = true;
     Runnable send = new Runnable() {
         @Override
@@ -66,10 +79,6 @@ public class Client {
                         dp1.username = username;
                         dp1.stateofgame = state;
                         dp1.ip = ip;
-
-//                        oos = new ObjectOutputStream(socket.getOutputStream());
-//                        oos.writeObject(state);
-
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException ie) {
@@ -143,14 +152,38 @@ public class Client {
             }
         }
     };
+    /**
+     * create socket
+     */
     public static Socket socket;
+    /**
+     * define port
+     */
     public static int port = 3421;
+    /**
+     * define ip
+     */
     public static String ip = "";
+    /**
+     * define gamepkg
+     */
     public int gamecount = 0;
+    /**
+     * define gamepkg
+     */
     public int wincount = 0;
+    /**
+     * define gamepkg
+     */
     public String username = "";
+    /**
+     * define gamepkg
+     */
     public static ArrayList<DataPackage> others = new ArrayList<DataPackage>();
 
+    /**
+     * define gamepkg update data
+     */
     public void update() {
         for (int i = 0; i < others.size(); i++) {
             try {

@@ -9,37 +9,94 @@ import java.net.Socket;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
+/**
+ *
+ * @author ytwytw
+ */
 public class BlackJackGUI {
 
     //dealer will stand on DEALER_LIMIT
     static final int DEALER_LIMIT = 17;
+    /**
+     * define GUI
+     */
     public JFrame frame;
+    /**
+     * Setup interface
+     */
     public JFrame mainframe;
     //deck of cards
+    /**
+     * initialize deck 
+     */
     public Deck deck;
-    //draw panel
+    /**
+     * create drawing panel
+     */
     public DrawFrame drawPanel;
-    //player
+    /**
+     * create players
+     */
     public Player player;
-    //dealer
+    /**
+     * create dealers 
+     */
     public Player dealer;
-    //message text
+    /**
+     * message text
+     */
     public String message = "";
+    /**
+     * message setup
+     */
     public String mplayer = "";
+    /**
+     * message setup
+     */
     public String mdealer = "";
-    //utility help class
+    /**
+     * utility help class
+     */
     public Utility help;
-    //game on
+    /**
+     * game on
+     */
     public boolean gameOn;
+    /**
+     * net setup
+     */
     public static Socket socket;
+    /**
+     * define port
+     */
     public static int port = 3421;
+    /**
+     * define ip
+     */
     public static String ip = "";
+    /**
+     * define datapkg
+     */
     public static int wincount = 0;
+    /**
+     * define datapkg
+     */
     public static int losecount = 0;
+    /**
+     * define datapkg
+     */
     public static int tiecount = 0;
+    /**
+     * define datapkg
+     */
     public static int gamecount = 0;
     
 
+    /**
+     *
+     * @param args
+     * @throws InterruptedException
+     */
     public static void main(String[] args) throws InterruptedException {
         Client c = new Client();
         BlackJackGUI gui = new BlackJackGUI();
@@ -47,6 +104,10 @@ public class BlackJackGUI {
     }
     /*
      * initialize the GUI
+     */
+    /**
+     *
+     * @throws InterruptedException
      */
     public void init() throws InterruptedException {
         //setup main screen
@@ -103,25 +164,15 @@ public class BlackJackGUI {
         frame.getContentPane().add(drawPanel);
         //add new game button to panel
         JButton newGameButton = new JButton("NEW GAME");
-//        newGameButton.setContentAreaFilled(false);
-//        newGameButton.setBorderPainted(false);
-//        newGameButton.setOpaque(false);
         newGameButton.setBounds(105, 495, 200, 40);
-
         drawPanel.add(newGameButton);
         //add hit button to panel
         JButton hitButton = new JButton("HIT");
         hitButton.setBounds(560, 495, 160, 40);
-//        hitButton.setOpaque(false);
-//        hitButton.setContentAreaFilled(false);
-//        hitButton.setBorderPainted(false);
         drawPanel.add(hitButton);
         //add stand button to panel
         JButton standButton = new JButton("STAND");
         standButton.setBounds(725, 495, 155, 40);
-//        standButton.setOpaque(false);
-//        standButton.setContentAreaFilled(false);
-//        standButton.setBorderPainted(false);
         drawPanel.add(standButton);
         //register hit button event listener
         hitButton.addActionListener(new HitListener1());
@@ -411,9 +462,6 @@ class DrawFrame extends JPanel {
      */
     @Override
     public void paintComponent(Graphics g) {
-        //green background
-//		g.setColor(new Color(0.0f, 0.5f, 0.0f));
-//		g.fillRect(0,0,this.getWidth(), this.getHeight());
         //draw message
         g.setFont(new Font("Arial", Font.BOLD, 40));
         g.setColor(new Color(1.0f, 0.0f, 0.0f));

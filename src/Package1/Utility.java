@@ -3,18 +3,34 @@ package Package1;
 /*
  * utility class, includes methods to decide the winner
  */
+/**
+ *
+ * @author ytwytw
+ */
 public class Utility {
 	
 	//blackjack value
 	static final int BLACK_JACK = 21;
 	//who is the winner
-	public enum Winner {PLAYER, DEALER, TIE}
+	/**
+     *
+     */
+    public enum Winner {
+        PLAYER,
+        DEALER,
+        TIE}
 	
 	/*
 	 * determine winner by selecting the biggest hand from player's and dealer's hands.
 	 * Four hands altogether (player: ace=1, ace=11) (dealer: ace=1, ace=11) 
 	 */
-	public Winner determineWinner (Player player, Player dealer) {
+	/**
+     *
+     * @param player
+     * @param dealer
+     * @return
+     */
+    public Winner determineWinner (Player player, Player dealer) {
 		int biggestPlayerHand = 0;
 		int biggestDealerHand = 0;
 		//find the biggest of the player's hands under 21
@@ -55,7 +71,12 @@ public class Utility {
 	 * check if the player has a blackjack.
 	 * This is checked after the first two cards are dealt
 	 */
-	public boolean checkBlackJack (Player player) {
+	/**
+     *
+     * @param player
+     * @return
+     */
+    public boolean checkBlackJack (Player player) {
 		if ((player.getValueOfHand()[0] == BLACK_JACK) || (player.getValueOfHand()[1] == BLACK_JACK)) {
 			return true;
 		} else {
@@ -67,7 +88,12 @@ public class Utility {
 	 * check if player bust (over 21)
 	 * this is checked after hit button event
 	 */
-	public boolean checkBust(Player player) {
+	/**
+     *
+     * @param player
+     * @return
+     */
+    public boolean checkBust(Player player) {
 		if ((player.getValueOfHand()[0] > BLACK_JACK) && (player.getValueOfHand()[1] > BLACK_JACK)) {
 			return true;	
 		} else {
