@@ -1,19 +1,14 @@
 package Package1;
 
-/*
- /* Standard playing card (4 suits and 13 face values) 
- */
 import java.awt.Image;
 
 /**
- *
+ * Standard playing card (4 suits and 13 face values) 
  * @author ytwytw
  */
 public class Card {
-	/**
-         * define card
-         * /
-     *
+    /**
+     * Define Suit 
      */
     public enum Suit {
         CLUBS,
@@ -21,34 +16,30 @@ public class Card {
         HEARTS,
         DIAMONDS}
 	
-	/**
-     *
+    /**
+     * Define Value of the card number
      */
     public enum FaceValue {
-		/**
-                 * 
-                 * define suit
-         *
-         */
-        ACE(1), KING(10), 
+        ACE(1), 
+        KING(10), 
         QUEEN(10), 
         JACK(10), 
         TEN(10), 
         NINE(9), 
-        EIGHT(8), SEVEN(7),
+        EIGHT(8), 
+        SEVEN(7),
         SIX(6),
         FIVE(5),
         FOUR(4),
         THREE(3),
         TWO(2);
-		private int intValue;
-	
-		FaceValue(int intValue) {
-			this.intValue = intValue;
-		}
+        private int intValue;
+        FaceValue(int intValue) {
+            this.intValue = intValue;
+        }
 		
-		/**
-         *
+        /**
+         * This returns the value of the card 
          * @return
          */
         public int getIntValue() {
@@ -58,11 +49,10 @@ public class Card {
 	
 	private Suit suit;
 	private FaceValue faceValue;
-	//image of the card
 	private Image image;
 	
-	/**
-     *
+    /**
+     * image of the card
      * @param suit
      * @param faceValue
      * @param image

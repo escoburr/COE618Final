@@ -3,13 +3,8 @@ package Package1;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-/*
- * Playing card deck:
- * - 52 cards
- * - no jokers
- */
 /**
- *
+ * Deck with 52 cards without jokers 
  * @author ytwytw
  */
 public class Deck {
@@ -18,11 +13,9 @@ public class Deck {
 	//ArrayList deck
 	private ArrayList<Card> deck = new ArrayList<Card>();
 
-	/*
-	 * initiate and create the deck of 52 cards
-	 */
-	/**
-     *
+    /**
+     * initiate and create the deck of 52 cards
+     * 
      */
     public Deck() {
 		int index = 0;	
@@ -33,11 +26,8 @@ public class Deck {
 			}	
 	}
 	
-	/*
-	 * deal a card from a deck
-	 */
-	/**
-     *
+    /**
+     * deal a card from a deck
      * @return
      */
     public Card dealCard() {

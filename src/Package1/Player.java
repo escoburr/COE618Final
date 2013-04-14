@@ -2,11 +2,8 @@ package Package1;
 
 import java.util.ArrayList;
 
-/*
- * player class
- */
 /**
- *
+ * This is the class for players 
  * @author ytwytw
  */
 public class Player {
@@ -17,18 +14,15 @@ public class Player {
 	//valueOfHand[1] includes the value with ace valued as 1
 	private int[] valueOfHand;
 	
-	/**
+    /**
      * first 2 card initial 
      */
     public Player() {
 		valueOfHand = new int[2];
 	}
 	
-	/*
-	 * add card to hand and increase the value of the hand
-	 */
-	/**
-     *
+    /**
+     * add card to hand and increase the value of the hand
      * @param card
      */
     public void addCard(Card card) {
@@ -60,44 +54,35 @@ public class Player {
 		}
 	}
 	
-	/*
-	 * get hand
-	 */
-	/**
-     *
+	
+    /**
+     * get hand
      * @return
      */
     public ArrayList<Card> getHand() {
 		return hand;
 	}
 	
-	/*
-	 * get the value of the hand
-	 */
-	/**
-     *
+    /**
+     * get the value of the hand
      * @return
      */
     public int[] getValueOfHand () {
 		return valueOfHand;
 	}
 	
-	/*
-	 * set the value of the hand
-	 */
-	/**
-     *
+    
+    /**
+     * set the value of the hand
      * @param valueOfHand
      */
     public void setValueOfHand (int[] valueOfHand) {
 		this.valueOfHand = valueOfHand;
 	}
 	
-	/*
-	 * print hand as a string 
-	 */
-	/**
-     *
+
+    /**
+     * print hand as a string 
      * @return
      */
     public String toString() {

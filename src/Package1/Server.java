@@ -15,7 +15,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -30,7 +29,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 /**
- *
+ * This is blackjack server code
  * @author ytwytw
  */
 public class Server {
@@ -182,7 +181,7 @@ public class Server {
     };
 
     /**
-     *
+     * remove the client from the list to disconnect the client 
      * @param index
      */
     public static void disconnectClient(int index) {
@@ -207,7 +206,7 @@ public class Server {
     public static DefaultListModel list_clients_model;
 
     /**
-     *
+     * this is main server running code
      * @param args
      */
     public static void main(String[] args) {

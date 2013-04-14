@@ -1,31 +1,27 @@
 package Package1;
 
-/*
- * utility class, includes methods to decide the winner
- */
 /**
- *
+ * utility class, includes methods to decide the winner
  * @author ytwytw
  */
+
 public class Utility {
 	
-	//blackjack value
+    /**blackjack value
+     * 
+     */
 	static final int BLACK_JACK = 21;
-	//who is the winner
-	/**
-     *
+    /**
+     * define the game result who is winner
      */
     public enum Winner {
         PLAYER,
         DEALER,
         TIE}
-	
-	/*
-	 * determine winner by selecting the biggest hand from player's and dealer's hands.
-	 * Four hands altogether (player: ace=1, ace=11) (dealer: ace=1, ace=11) 
-	 */
-	/**
-     *
+
+    /**
+     * determine winner by selecting the biggest hand from player's and dealer's hands.
+     * Four hands altogether (player: ace=1, ace=11) (dealer: ace=1, ace=11) 
      * @param player
      * @param dealer
      * @return
@@ -67,12 +63,9 @@ public class Utility {
 
 	}
 	
-	/*
-	 * check if the player has a blackjack.
-	 * This is checked after the first two cards are dealt
-	 */
-	/**
-     *
+    /**
+     * check if the player has a blackjack.
+     * This is checked after the first two cards are dealt
      * @param player
      * @return
      */
@@ -84,12 +77,9 @@ public class Utility {
 		}
 	}
 	
-	/*
-	 * check if player bust (over 21)
-	 * this is checked after hit button event
-	 */
-	/**
-     *
+    /**
+     * check if player bust (over 21)
+     * this is checked after hit button event
      * @param player
      * @return
      */

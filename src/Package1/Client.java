@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * This is the client connects to the server
  * @author ytwytw
  */
 public class Client {
@@ -165,24 +165,24 @@ public class Client {
      */
     public static String ip = "";
     /**
-     * define gamepkg
+     * define total game counts in the game package 
      */
     public int gamecount = 0;
     /**
-     * define gamepkg
+     * define total win counts in the game package 
      */
     public int wincount = 0;
     /**
-     * define gamepkg
+     * define client username in the game package 
      */
     public String username = "";
     /**
-     * define gamepkg
+     * define array list of the game data package 
      */
     public static ArrayList<DataPackage> others = new ArrayList<DataPackage>();
 
     /**
-     * define gamepkg update data
+     * update the game data to the package 
      */
     public void update() {
         for (int i = 0; i < others.size(); i++) {

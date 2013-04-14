@@ -10,12 +10,14 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 /**
- *
+ * This is the main GUI of the blackjack game 
  * @author ytwytw
  */
 public class BlackJackGUI {
 
-    //dealer will stand on DEALER_LIMIT
+    /**dealer will stand on DEALER_LIMIT
+     * 
+     */ 
     static final int DEALER_LIMIT = 17;
     /**
      * define GUI
@@ -25,9 +27,8 @@ public class BlackJackGUI {
      * Setup interface
      */
     public JFrame mainframe;
-    //deck of cards
     /**
-     * initialize deck 
+     * initialize deck of cards
      */
     public Deck deck;
     /**
@@ -75,25 +76,25 @@ public class BlackJackGUI {
      */
     public static String ip = "";
     /**
-     * define datapkg
+     * define win counts 
      */
     public static int wincount = 0;
     /**
-     * define datapkg
+     * define lose counts 
      */
     public static int losecount = 0;
     /**
-     * define datapkg
+     * define tie counts 
      */
     public static int tiecount = 0;
     /**
-     * define datapkg
+     * define total game counts 
      */
     public static int gamecount = 0;
     
 
     /**
-     *
+     * Main Running code of the GUI 
      * @param args
      * @throws InterruptedException
      */
@@ -102,11 +103,9 @@ public class BlackJackGUI {
         BlackJackGUI gui = new BlackJackGUI();
         gui.init();
     }
-    /*
-     * initialize the GUI
-     */
+
     /**
-     *
+     * initialize the GUI
      * @throws InterruptedException
      */
     public void init() throws InterruptedException {
@@ -182,7 +181,7 @@ public class BlackJackGUI {
         standButton.addActionListener(new standListener());
     }
 
-    /*
+    /**
      * set up a new game
      */
     private void setupNewGame() {
@@ -202,7 +201,7 @@ public class BlackJackGUI {
         gameOn = true;
     }
 
-    /*
+    /**
      * new game button event handling
      */
     class NewGameListener implements ActionListener {
@@ -256,7 +255,7 @@ public class BlackJackGUI {
         }
     }
 
-    /*
+    /**
      * hit button event handling
      */
     class HitListener1 implements ActionListener {
@@ -305,7 +304,7 @@ public class BlackJackGUI {
         }
     }
 
-    /*
+    /**
      * stand button event handling
      */
     class standListener implements ActionListener {
@@ -389,7 +388,7 @@ public class BlackJackGUI {
         }
     }
 }
-/*
+/**
  * class used to draw the panel
  */
 
@@ -409,21 +408,21 @@ class DrawFrame extends JPanel {
     //game on
     boolean gameOn;
 
-    /*
+    /**
      * set player hand to be drawn on panel
      */
     public void setPlayerHand(ArrayList<Card> playerHand) {
         this.playerHand = playerHand;
     }
 
-    /*
+    /**
      * set dealer hand to be drawn on panel
      */
     public void setDealerHand(ArrayList<Card> dealerHand) {
         this.dealerHand = dealerHand;
     }
 
-    /*
+    /**
      * set message
      */
     public void setMessage(String message) {
@@ -449,7 +448,7 @@ class DrawFrame extends JPanel {
     public void settiecount(int tiecount) {
         this.tiecount = "Tie: " + tiecount;
     }
-    /*
+    /**
      * set gameOn signal
      */
 
@@ -457,7 +456,7 @@ class DrawFrame extends JPanel {
         this.gameOn = gameOn;
     }
 
-    /*
+    /**
      * the actual method used to draw the panel
      */
     @Override

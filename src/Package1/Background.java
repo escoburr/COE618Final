@@ -3,19 +3,18 @@ package Package1;
 import java.awt.*;
 import javax.swing.*;
 
-/*
+/**
+ * 
  *  Support custom painting on a panel in the form of
- *
  *  a) images - that can be scaled, tiled or painted at original size
  *  b) non solid painting - that can be done by using a Paint object
  *
  *  Also, any component added directly to this panel will be made
  *  non-opaque so that the custom painting can show through.
+ * 
+ *  @author ytwytw
  */
-/**
- *
- * @author ytwytw
- */
+
 public class Background extends JPanel {
 
     /**
@@ -37,22 +36,17 @@ public class Background extends JPanel {
     private float alignmentY = 0.5f;
     private boolean isTransparentAdd = true;
 
-    /*
-     *  Set image as the background with the SCALED style
-     */
+
     /**
-     *
+     * Set image as the background with the SCALED style
      * @param image
      */
     public Background(Image image) {
         this(image, SCALED);
     }
 
-    /*
-     *  Set image as the background with the specified style
-     */
     /**
-     *
+     * Set image as the background with the specified style
      * @param image
      * @param style
      */
@@ -62,11 +56,8 @@ public class Background extends JPanel {
         setLayout(new BorderLayout());
     }
 
-    /*
-     *  Set image as the backround with the specified style and alignment
-     */
     /**
-     *
+     * Set image as the backround with the specified style and alignment
      * @param image
      * @param style
      * @param alignmentX
@@ -80,11 +71,8 @@ public class Background extends JPanel {
         setLayout(new BorderLayout());
     }
 
-    /*
-     *  Use the Paint interface to paint a background
-     */
     /**
-     *
+     * Use the Paint interface to paint a background
      * @param painter
      */
     public Background(Paint painter) {
@@ -92,11 +80,8 @@ public class Background extends JPanel {
         setLayout(new BorderLayout());
     }
 
-    /*
-     *	Set the image used as the background
-     */
     /**
-     *
+     * Set the image used as the background
      * @param image
      */
     public void setImage(Image image) {
@@ -104,11 +89,8 @@ public class Background extends JPanel {
         repaint();
     }
 
-    /*
-     *	Set the style used to paint the background image
-     */
     /**
-     *
+     * Set the style used to paint the background image
      * @param style
      */
     public void setStyle(int style) {
@@ -116,11 +98,8 @@ public class Background extends JPanel {
         repaint();
     }
 
-    /*
-     *	Set the Paint object used to paint the background
-     */
     /**
-     *
+     * Set the Paint object used to paint the background
      * @param painter
      */
     public void setPaint(Paint painter) {
@@ -128,11 +107,8 @@ public class Background extends JPanel {
         repaint();
     }
 
-    /*
-     *  Specify the horizontal alignment of the image when using ACTUAL style
-     */
     /**
-     *
+     * Specify the horizontal alignment of the image when using ACTUAL style
      * @param alignmentX
      */
     public void setImageAlignmentX(float alignmentX) {
@@ -140,11 +116,8 @@ public class Background extends JPanel {
         repaint();
     }
 
-    /*
-     *  Specify the horizontal alignment of the image when using ACTUAL style
-     */
     /**
-     *
+     * Specify the horizontal alignment of the image when using ACTUAL style
      * @param alignmentY
      */
     public void setImageAlignmentY(float alignmentY) {
@@ -152,22 +125,16 @@ public class Background extends JPanel {
         repaint();
     }
 
-    /*
-     *  Override method so we can make the component transparent
-     */
     /**
-     *
+     * Override method so we can make the component transparent
      * @param component
      */
     public void add(JComponent component) {
         add(component, null);
     }
 
-    /*
-     *  Override to provide a preferred size equal to the image size
-     */
     /**
-     *
+     * Override to provide a preferred size equal to the image size
      * @return
      */
     @Override
@@ -179,11 +146,8 @@ public class Background extends JPanel {
         }
     }
 
-    /*
-     *  Override method so we can make the component transparent
-     */
     /**
-     *
+     * Override method so we can make the component transparent
      * @param component
      * @param constraints
      */
@@ -195,20 +159,17 @@ public class Background extends JPanel {
         super.add(component, constraints);
     }
 
-    /*
-     *  Controls whether components added to this panel should automatically
-     *  be made transparent. That is, setOpaque(false) will be invoked.
-     *  The default is set to true.
-     */
     /**
-     *
+     * Controls whether components added to this panel should automatically
+     * be made transparent. That is, setOpaque(false) will be invoked.
+     * The default is set to true.
      * @param isTransparentAdd
      */
     public void setTransparentAdd(boolean isTransparentAdd) {
         this.isTransparentAdd = isTransparentAdd;
     }
 
-    /*
+    /**
      *	Try to make the component transparent.
      *  For components that use renderers, like JTable, you will also need to
      *  change the renderer to be transparent. An easy way to do this it to
@@ -229,11 +190,8 @@ public class Background extends JPanel {
         }
     }
 
-    /*
-     *  Add custom painting
-     */
     /**
-     *
+     * Add custom painting
      * @param g
      */
     @Override
@@ -273,7 +231,7 @@ public class Background extends JPanel {
         }
     }
 
-    /*
+    /**
      *  Custom painting code for drawing a SCALED image as the background
      */
     private void drawScaled(Graphics g) {
@@ -281,7 +239,7 @@ public class Background extends JPanel {
         g.drawImage(image, 0, 0, d.width, d.height, null);
     }
 
-    /*
+    /**
      *  Custom painting code for drawing TILED images as the background
      */
     private void drawTiled(Graphics g) {
@@ -296,7 +254,7 @@ public class Background extends JPanel {
         }
     }
 
-    /*
+    /**
      *  Custom painting code for drawing the ACTUAL image as the background.
      *  The image is positioned in the panel based on the horizontal and
      *  vertical alignments specified.

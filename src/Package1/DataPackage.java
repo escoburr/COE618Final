@@ -3,29 +3,29 @@ package Package1;
 import java.io.Serializable;
 
 /**
- *
+ * Data Package transmitting between server and client 
  * @author ytwytw
  */
 public class DataPackage implements Serializable {
 
     /**
-     * define gamepkg
+     * define username in the game package 
      */
     public String username = "";
     /**
-     * define gamepkg
+     * define winner counts in the game package 
      */
     public int wincount =0;
     /**
-     * define gamepkg
+     * define game counts in the game package 
      */
     public int gamecount =0;
     /**
-     * define gamepkg
+     * define current client status 
      */
     public int stateofgame =0;
     /**
-     * define gamepkg
+     * define client IP
      */
     public String ip = "";
     
